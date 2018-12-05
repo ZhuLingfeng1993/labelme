@@ -591,6 +591,11 @@ class MainWindow(QtWidgets.QMainWindow, WindowMixin):
 
         self.populateModeActions()
 
+        # Display cursor coordinates at the right of status bar
+        from PyQt5.QtWidgets import QLabel
+        self.labelCoordinates = QLabel('')
+        self.statusBar().addPermanentWidget(self.labelCoordinates)
+
         # self.firstStart = True
         # if self.firstStart:
         #    QWhatsThis.enterWhatsThisMode()
@@ -668,6 +673,7 @@ class MainWindow(QtWidgets.QMainWindow, WindowMixin):
         self.labelFile = None
         self.otherData = None
         self.canvas.resetState()
+        self.labelCoordinates.clear()
 
     def currentItem(self):
         items = self.labelList.selectedItems()

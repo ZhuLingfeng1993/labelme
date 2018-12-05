@@ -151,6 +151,12 @@ class Canvas(QtWidgets.QWidget):
         else:
             pos = self.transformPos(ev.posF())
 
+        # Update coordinates in status bar if image is opened
+        window = self.parent().window()
+        # if window.filePath is not None:
+        self.parent().window().labelCoordinates.setText(
+            'X: %d; Y: %d' % (pos.x(), pos.y()))
+
         self.prevMovePoint = pos
         self.restoreCursor()
 
