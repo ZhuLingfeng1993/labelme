@@ -1,3 +1,6 @@
+.idea
+venv
+
 /.cache/
 /.pytest_cache/
 
