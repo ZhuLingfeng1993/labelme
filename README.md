@@ -119,6 +119,11 @@ Firstly, follow instruction in [Anaconda](#anaconda).
 conda install pillow=4.0.0
 ```
 
+### my note
+
+ win10下安装Anaconda2的问题,根本原因是系统的用户名问题, https://blog.csdn.net/u013774102/article/details/78924572, https://www.cnblogs.com/kangronghu/p/6154919.html, https://blog.csdn.net/lxl743p/article/details/78708088?utm_source=blogkpcl7, https://stackoverflow.com/questions/45401062/anaconda-conda-traceback-unicodedecodeerror-ascii-codec-cant-decode-byte-0x
+[Win10更改电脑用户名（可更改C:\Users\用户名）](https://www.cnblogs.com/wealthyoulife/p/8573278.html)
+可能会造成未知的后果 
 
 ## Usage
 
@@ -184,6 +189,29 @@ source .anaconda3/bin/activate
 pip install -e .
 ```
 
+### my note
+
+- 使用pycharm新建virtualenv环境, 继承系统的site-packages
+- 切换到虚拟环境, `source venv/bin/activate` [参考](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000)
+- 按照官方教程安装
+- 在venv下运行labelme即可, 对源码的修改可以直接起作用
+
+添加新功能
+
+- 根据labelImg源码:
+- 添加显示坐标功能(labelCoordinates)
+- 添加显示标签功能(Draw text at the top-left, paintLabel)
+- difficlut功能实现可能比较复杂, 是shape的一个参数
+
+添加属性功能 
+
+(https://github.com/tzutalin/labelImg/issues/102, https://github.com/tzutalin/labelImg/search?q=difficult&type=Commits)
+
+要修改的代码较多, 而且有pyqt版本问题, 是一个小课题啦, 暂时不做 
+
+pyqt版本问题
+
+同时安装PyQt4和PyQt5之sip版本区分](https://blog.csdn.net/shuishen520/article/details/79556931) |                      |
 
 ## How to build standalone executable
 
@@ -203,6 +231,13 @@ pip install pyinstaller
 pyinstaller labelme.spec
 dist/labelme --version
 ```
+
+### my note
+
+pycharm的Terminal里面安装pip包无缘无故读取包超时, 切换到unbuntu terminal ok
+
+创建成功, 运行时报错: `… argument 1 has unexpected type 'QVariant'`, 应该是pyqt版本的问题: `RuntimeWarning: Selected binding "pyqt5" could not be found, using "pyqt4"`, 在windows下可能没这个问题 
+
 
 
 ## Acknowledgement
