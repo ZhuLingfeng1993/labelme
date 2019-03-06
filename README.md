@@ -40,6 +40,9 @@ It is written in Python and uses Qt for its graphical interface.
 - Python2 / Python3
 - [PyQt4 / PyQt5](http://www.riverbankcomputing.co.uk/software/pyqt/intro) / [PySide2](https://wiki.qt.io/PySide2_GettingStarted)
 
+## Installation from source
+
+see [Developing](#Developing)
 
 ## Installation
 
@@ -49,6 +52,8 @@ There are options:
 - Platform specific installation: [Ubuntu](#ubuntu), [macOS](#macos), [Windows](#windows)
 
 ### Anaconda
+
+see also [Developing](#source activate)
 
 You need install [Anaconda](https://www.continuum.io/downloads), then run below:
 
@@ -69,6 +74,41 @@ source activate labelme
 # conda install pyqt
 pip install pyqt5  # pyqt5 can be installed via pip on python3
 pip install labelme
+```
+
+### 修改pip源
+
+**pip国内的一些镜像**
+
+  阿里云 <http://mirrors.aliyun.com/pypi/simple/> 
+   中国科技大学 <https://pypi.mirrors.ustc.edu.cn/simple/> 
+   豆瓣(douban) <http://pypi.douban.com/simple/> 
+   清华大学 <https://pypi.tuna.tsinghua.edu.cn/simple/> 
+   中国科学技术大学 <http://pypi.mirrors.ustc.edu.cn/simple/>
+
+**修改源方法：**
+
+**临时使用：** 
+ 可以在使用pip的时候在后面加上-i参数，指定pip源 
+ eg: pip install scrapy -i <https://pypi.tuna.tsinghua.edu.cn/simple>
+
+**永久修改：** 
+ **linux:** 
+ 修改 ~/.pip/pip.conf (没有就创建一个)， 内容如下：
+
+```
+[global]
+index-url = http://pypi.douban.com/simple
+[install]
+trusted-host=pypi.douban.com
+```
+
+**windows:** 
+ 直接在user目录中创建一个pip目录，如：C:\Users\xx\pip，新建文件pip.ini，内容如下
+
+```
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 ### Docker
@@ -119,9 +159,9 @@ Firstly, follow instruction in [Anaconda](#anaconda).
 conda install pillow=4.0.0
 ```
 
-### my note
+**my note**
 
- win10下安装Anaconda2的问题,根本原因是系统的用户名问题, https://blog.csdn.net/u013774102/article/details/78924572, https://www.cnblogs.com/kangronghu/p/6154919.html, https://blog.csdn.net/lxl743p/article/details/78708088?utm_source=blogkpcl7, https://stackoverflow.com/questions/45401062/anaconda-conda-traceback-unicodedecodeerror-ascii-codec-cant-decode-byte-0x
+ win10下安装Anaconda2的问题,根本原因是系统的用户名包含中文的问题, https://blog.csdn.net/u013774102/article/details/78924572, https://www.cnblogs.com/kangronghu/p/6154919.html, https://blog.csdn.net/lxl743p/article/details/78708088?utm_source=blogkpcl7, https://stackoverflow.com/questions/45401062/anaconda-conda-traceback-unicodedecodeerror-ascii-codec-cant-decode-byte-0x
 [Win10更改电脑用户名（可更改C:\Users\用户名）](https://www.cnblogs.com/wealthyoulife/p/8573278.html)
 可能会造成未知的后果 
 
@@ -176,8 +216,9 @@ flake8 .
 pytest -v tests
 ```
 
-
 ## Developing
+
+**author**
 
 ```bash
 git clone https://github.com/wkentaro/labelme.git
@@ -189,12 +230,34 @@ source .anaconda3/bin/activate
 pip install -e .
 ```
 
-### my note
+**Windows With Annaconda**
 
-- 使用pycharm新建virtualenv环境, 继承系统的site-packages
-- 切换到虚拟环境, `source venv/bin/activate` [参考](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000)
-- 按照官方教程安装
-- 在venv下运行labelme即可, 对源码的修改可以直接起作用
+```bash
+# Download labelme project in https://github.com/wkentaro/labelme.git
+# Install Annaconda
+# open conda promot
+# Install labelme in the default conda environment(very quick)
+cd labelme
+pip install -e .
+
+# You can also install labelme in a new conda environment if needed, but it need to download some requirement pacakges for basic python env and for labelme, it may cost lot of time. 
+```
+
+**Ubuntu without Annaconda**
+
+如果需要避免与系统包的相互影响，在python虚拟环境下进行（可以是conda，或virtualenv），下面以pycharm自带的virtualenv为例：
+
+```bash
+# 使用pycharm新建virtualenv环境, 继承系统的site-packages
+# 切换到虚拟环境, source venv/bin/activate
+source venv/bin/activate
+# Install labelme 
+cd labelme
+pip install -e .
+# 在venv下运行labelme即可, 对源码的修改可以直接起作用
+```
+
+虚拟环境,  [参考](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000)
 
 添加新功能
 
@@ -207,7 +270,7 @@ pip install -e .
 
 (https://github.com/tzutalin/labelImg/issues/102, https://github.com/tzutalin/labelImg/search?q=difficult&type=Commits)
 
-要修改的代码较多, 而且有pyqt版本问题, 是一个小课题啦, 暂时不做 
+要修改的代码较多, 而且有pyqt版本问题, 是一个小课题啦, 暂时未实现
 
 pyqt版本问题
 
@@ -230,6 +293,9 @@ pip install .
 pip install pyinstaller
 pyinstaller labelme.spec
 dist/labelme --version
+
+# run 
+./dist/labelme
 ```
 
 ### my note
