@@ -165,6 +165,10 @@ conda install pillow=4.0.0
 [Win10更改电脑用户名（可更改C:\Users\用户名）](https://www.cnblogs.com/wealthyoulife/p/8573278.html)
 可能会造成未知的后果 
 
+## 与labelImg的冲突
+
+LabelImg和lableme无法同时使用，是系统包的问题，不是python包，labelme源码安装需要pyqt5，暂时不去管这个问题，需要用什么装什么吧
+
 ## Usage
 
 Run `labelme --help` for detail.  
@@ -249,11 +253,11 @@ pip install -e .
 
 ```bash
 # 使用pycharm新建virtualenv环境, 继承系统的site-packages
-# 切换到虚拟环境, source venv/bin/activate
+cd lableme
+# 命令行命令切换到虚拟环境
 source venv/bin/activate
 # Install labelme 
-cd labelme
-pip install -e .
+pip install -e . # 需要pyqt5
 # 在venv下运行labelme即可, 对源码的修改可以直接起作用
 ```
 
